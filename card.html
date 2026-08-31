@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Happy Birthday, Hon! 🎉</title>
+<link rel="stylesheet" href="assets/style1.css">
+</head>
+<body class="card-page-body">
+
+  <!-- Floating Music Toggle Button -->
+  <button id="musicToggleBtn" class="music-btn" onclick="toggleAudio()">
+    🎵 Play Music
+  </button>
+
+  <!-- Birthday Card Screen -->
+  <div id="hidden" class="revealed">
+    <div class="birthday-card">
+
+      <!-- Decorative number -->
+      <div class="big-number">31</div>
+
+      <!-- Left / text section -->
+      <div class="card-content">
+        <div class="card-badge">✨ SPECIAL DAY ✨</div>
+
+        <h1>
+          Happy Birthday,
+          <span id="bName">Quin</span>!
+        </h1>
+
+        <div class="small-line"></div>
+
+        <p class="card-message">
+          Wishing you a day overflowing with love, sweet treats,
+          laughter, and all your favorite things.
+          May this year bring you endless joy and beautiful memories. 💕
+        </p>
+      </div>
+
+      <!-- Photo section with Dual Keepsake Frames -->
+      <div class="card-photo">
+        
+        <div class="photo-gallery">
+          <!-- First Photo (Primary) -->
+          <div class="photo-frame frame-1">
+            <img
+              id="bImg1"
+              src="assets/IMG-20260831-WA0039.jpg"
+              alt="Birthday Memory 1"
+            >
+            <div class="polaroid-label">Beauty Queen ✨</div>
+          </div>
+
+          <!-- Second Photo (Secondary Keepsake) -->
+          <div class="photo-frame frame-2">
+            <img
+              id="bImg2"
+              src="assets/IMG-20260831-WA0040.jpg"
+              alt="Birthday Memory 2"
+            >
+            <div class="polaroid-label">Forever Treasured 💖</div>
+          </div>
+
+          <!-- Decorative Floating Heart Badge -->
+          <div class="memory-heart">💕</div>
+        </div>
+
+        <!-- Clearly Visible Wish Button -->
+        <div class="photo-caption">
+          <a href="card1.html" class="wish-link-btn">MAKE A WISH 🥂</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Local Audio Element -->
+  <audio id="bdayAudio" src="audio/Blue.mp3" preload="auto" loop></audio>
+
+  <!-- Confetti CDN Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script src="assets/script.js"></script>
+</body>
+</html>

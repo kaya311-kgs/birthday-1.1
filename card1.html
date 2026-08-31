@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+<title>Make a Wish, Quin! ✨</title>
+<link rel="stylesheet" href="assets/style1.css">
+<style>
+  /* Single-column centered card layout */
+  .wish-container-vertical {
+    width: min(650px, 92vw);
+    margin: 30px auto;
+    background: var(--cream);
+    border-radius: 12px;
+    overflow: hidden;
+    box-shadow: 0 30px 60px rgba(0, 0, 0, 0.12), 0 10px 20px rgba(0, 0, 0, 0.05);
+    position: relative;
+    padding-bottom: 40px;
+    z-index: 10;
+  }
+
+  /* Top Photo Section */
+  .top-photo-section {
+    background: var(--main-color);
+    padding: 40px 20px 30px 20px;
+    display: flex;
+    justify-content: center;
+    position: relative;
+  }
+
+  .charming-frame-top {
+    position: relative;
+    width: min(320px, 80vw);
+    height: 380px;
+    background: #ffffff;
+    padding: 14px 14px 45px 14px;
+    border-radius: 8px;
+    box-shadow: 0 18px 40px rgba(0, 0, 0, 0.2), 0 0 25px rgba(255, 255, 255, 0.5);
+    transform: rotate(-1.5deg);
+    transition: transform 0.3s ease;
+  }
+
+  .charming-frame-top img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    border-radius: 4px;
+    display: block;
+  }
+
+  .charming-label-top {
+    position: absolute;
+    bottom: 14px;
+    left: 0;
+    right: 0;
+    text-align: center;
+    font-size: 12px;
+    font-weight: 800;
+    letter-spacing: 2px;
+    color: #444;
+  }
+
+  /* Wish Content Section */
+  .wish-content-section {
+    padding: 35px 40px 10px 40px;
+    text-align: center;
+  }
+
+  .wish-content-section h1 {
+    font-size: clamp(28px, 4vw, 40px);
+    margin: 10px 0;
+    color: var(--text);
+  }
+
+  /* Game Selection Buttons */
+  .wish-options-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    max-width: 480px;
+    margin: 25px auto;
+  }
+
+  .wish-option-btn {
+    background: #ffffff;
+    border: 2px solid #e5dec9;
+    padding: 14px 20px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    color: #333;
+    cursor: pointer;
+    transition: all 0.25s ease;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.03);
+    text-align: left;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .wish-option-btn::after {
+    content: "✨";
+    font-size: 16px;
+    transition: transform 0.2s ease;
+  }
+
+  .wish-option-btn:hover {
+    border-color: var(--main-dark);
+    background: #fffdf9;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 15px rgba(247, 185, 40, 0.2);
+  }
+
+  /* Back Link stays safely on top of falling elements */
+  .back-link-container {
+    text-align: center;
+    margin-top: 25px;
+    position: relative;
+    z-index: 30;
+  }
+
+  .back-link {
+    color: #444;
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 800;
+    letter-spacing: 1px;
+    background: rgba(255, 255, 255, 0.9);
+    padding: 10px 20px;
+    border-radius: 30px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+    transition: all 0.2s ease;
+    display: inline-block;
+  }
+
+  .back-link:hover {
+    background: var(--text);
+    color: white;
+  }
+
+  /* =====================================================
+     FLOATING ELEMENTS ANIMATION (FLOWERS, STARS, HEARTS, MACQUIN)
+     ===================================================== */
+  .floating-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    pointer-events: none;
+    overflow: hidden;
+    z-index: 5;
+    display: none; /* Hidden until a wish is made */
+  }
+
+  .floating-item {
+    position: absolute;
+    top: -10vh;
+    font-size: 20px;
+    animation: fallDown linear infinite;
+    user-select: none;
+  }
+
+  /* Special styling for floating text name items */
+  .floating-text {
+    font-weight: 900;
+    letter-spacing: 2px;
+    color: #d49e1e;
+    background: rgba(255, 255, 255, 0.85);
+    padding: 3px 8px;
+    border-radius: 4px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+  }
+
+  @keyframes fallDown {
+    0% {
+      transform: translateY(-10vh) rotate(0deg);
+      opacity: 1;
+    }
+    100% {
+      transform: translateY(110vh) rotate(360deg);
+      opacity: 0.2;
+    }
+  }
+
+  @media (max-width: 600px) {
+    .wish-content-section {
+      padding: 25px 20px 10px 20px;
+    }
+    .charming-frame-top {
+      height: 320px;
+    }
+  }
+</style>
+</head>
+<body class="card-page-body">
+
+  <!-- Floating Elements Layer (Flowers, Stars, Hearts, MACQUIN) -->
+  <div id="floatingContainer" class="floating-container"></div>
+
+  <div class="revealed">
+    <div class="wish-container-vertical">
+
+      <!-- Top Photo Section -->
+      <div class="top-photo-section">
+        <div class="charming-frame-top">
+          <img
+            src="assets/IMG-20260831-WA0041.jpg"
+            alt="Birthday Girl Portrait"
+          >
+          <div class="charming-label-top">✨ THE BIRTHDAY QUIN ✨</div>
+        </div>
+      </div>
+
+      <!-- Wish Game Section -->
+      <div class="wish-content-section">
+        <div class="card-badge">✨ MAKE A WISH GAME ✨</div>
+        <h1>Lock In Your Destiny</h1>
+        <div class="small-line" style="margin: 15px auto;"></div>
+        
+        <p class="card-message" style="margin: 0 auto 10px; max-width: 450px;">
+          Choose your ultimate heart's desire to trigger magical celebrations across the screen, Quin! 💕
+        </p>
+
+        <!-- Interactive Wish Options -->
+        <div class="wish-options-grid">
+          <button class="wish-option-btn" onclick="triggerWishGame('Being with me forever')">
+            <span>Being with me forever 🥂</span>
+          </button>
+          <button class="wish-option-btn" onclick="triggerWishGame('Endless adventures, joy, and laughter')">
+            <span>Endless adventures, joy, and laughter ✨</span>
+          </button>
+          <button class="wish-option-btn" onclick="triggerWishGame('Achieving all our biggest dreams together')">
+            <span>Achieving all our biggest dreams together 💫</span>
+          </button>
+          <button class="wish-option-btn" onclick="triggerWishGame('A year filled with profound peace and success')">
+            <span>A year filled with profound peace and success 👑</span>
+          </button>
+        </div>
+
+        <!-- Safe Back Button Area -->
+        <div class="back-link-container">
+          <a href="index.html" class="back-link">← Back to Birthday Card</a>
+        </div>
+      </div>
+
+    </div>
+  </div>
+
+  <!-- Local Audio Element -->
+  <audio id="bdayAudio" src="audio/SLICK.mp3" preload="auto" loop></audio>
+
+  <!-- Confetti CDN Library -->
+  <script src="https://cdn.jsdelivr.net/npm/canvas-confetti@1.6.0/dist/confetti.browser.min.js"></script>
+  <script>
+    // Auto-play audio immediately upon loading the page
+    window.addEventListener('DOMContentLoaded', () => {
+      const audio = document.getElementById('bdayAudio');
+      if (audio) {
+        audio.play().catch(error => {
+          console.log("Autoplay blocked by browser. Playing on first interaction:", error);
+          document.body.addEventListener('click', () => {
+            audio.play();
+          }, { once: true });
+        });
+      }
+    });
+
+    function triggerWishGame(wishText) {
+      // 1. Initial Confetti Burst
+      confetti({
+        particleCount: 180,
+        spread: 100,
+        origin: { y: 0.5 }
+      });
+
+      // 2. Activate flowing background elements (icons + MACQUIN)
+      const container = document.getElementById('floatingContainer');
+      container.style.display = 'block';
+      container.innerHTML = ''; // Clear previous elements if any
+
+      const icons = ['🌸', '💖', '⭐', '🌷', '✨', '💐', '💕', '🌟', '🌺', 'MACQUIN', 'MACQUIN'];
+      const totalItems = 50; // Total count of falling items
+
+      for (let i = 0; i < totalItems; i++) {
+        const item = document.createElement('div');
+        item.classList.add('floating-item');
+        
+        const randomChoice = icons[Math.floor(Math.random() * icons.length)];
+        
+        if (randomChoice === 'MACQUIN') {
+          item.textContent = 'MACQUIN 👑';
+          item.classList.add('floating-text');
+        } else {
+          item.textContent = randomChoice;
+          item.style.fontSize = (Math.random() * 16 + 18) + 'px';
+        }
+        
+        // Random horizontal position, fall speed, and delay
+        item.style.left = Math.random() * 100 + 'vw';
+        item.style.animationDuration = (Math.random() * 3 + 3) + 's'; 
+        item.style.animationDelay = (Math.random() * 2) + 's';
+
+        container.appendChild(item);
+      }
+
+      // 3. Sweet popup notification
+      setTimeout(() => {
+        alert(`✨ WISH LOCKED IN! ✨\n\n" ${wishText} "\n\nThe universe has answered, Quin! Enjoy your magical year. 💕`);
+      }, 400);
+    }
+  </script>
+</body>
+</html>
